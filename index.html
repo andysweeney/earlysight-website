@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EarlySight</title>
+<meta name="description" content="EarlySight reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing, months before it shows in their results.">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: navy hero carrying the change-vs-number chart, then white reading sections in one 1120px column, with one navy findings band. Single committed brand look. */
+:root{
+  --ink:#0B1D38; --deep:#1A426A; --ocean:#245A84; --midnight:#12305A;
+  --teal:#17B3C4; --teal-text:#0F7280; --aqua:#5ECBD6; --pale:#B8E8EE;
+  --mist:#EEF4F7; --slate:#5B6B7F; --rule:#D5E0E8; --paper:#FFFFFF; --on-navy:#A9B8C8;
+  --display:"Outfit","IBM Plex Sans",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+a{color:var(--teal-text)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.12;letter-spacing:-.015em;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:24px}
+.label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-text)}
+
+/* header */
+.top{position:absolute;inset:0 0 auto 0;z-index:2;padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:22px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-family:var(--display);font-size:26px;letter-spacing:-.02em;line-height:1}
+.brand b{font-weight:600;color:var(--teal)} .brand span{font-weight:400}
+nav{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+nav a{color:var(--on-navy);text-decoration:none;font-size:15px}
+nav a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;text-decoration:none;border-radius:8px;padding:12px 20px;min-height:44px;transition:background .15s,color .15s}
+.btn-teal{background:var(--teal);color:var(--ink)} .btn-teal:hover{background:var(--aqua)}
+.btn-ghost{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)} .btn-ghost:hover{box-shadow:inset 0 0 0 1.5px #fff}
+nav .btn{padding:10px 16px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(168deg,var(--ocean) 0%,var(--deep) 30%,var(--midnight) 58%,var(--ink) 100%);padding-top:calc(120px + env(safe-area-inset-top,0px));padding-bottom:88px}
+.viz{display:grid;gap:14px}
+.dots{justify-self:end;width:96px;height:111px;margin-right:4px}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
+.hero h1{font-size:clamp(40px,5.6vw,66px);letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero .lede{margin-top:22px;font-size:19px;color:#D8E2EC;max-width:31em}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+.chart{background:rgba(11,29,56,.55);border:1px solid rgba(169,184,200,.18);border-radius:16px;padding:22px 22px 18px}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.chart-head strong{font-family:var(--display);font-weight:600;font-size:17px}
+.chart-head small{font-size:12px;color:var(--on-navy)}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font-family:var(--body)}
+.chart .legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px;font-size:14px;line-height:1.45;color:#D8E2EC}
+.legend div{display:flex;gap:10px;align-items:flex-start}
+.legend i{flex:none;width:14px;height:3px;border-radius:2px;margin-top:10px}
+
+/* sections */
+section{padding-block:96px}
+.intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
+.intro h2{font-size:clamp(30px,3.6vw,42px)}
+.intro .copy{display:grid;gap:18px;color:#24364F;max-width:36em}
+.intro .copy strong{color:var(--ink)}
+
+.spots{background:var(--mist)}
+.spots .head{max-width:40em;display:grid;gap:14px}
+.spots h2{font-size:clamp(28px,3.2vw,38px)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
+.item{background:var(--paper);border-radius:12px;padding:28px;display:grid;gap:12px;align-content:start}
+.item svg{width:40px;height:40px}
+.item h3{font-size:21px}
+.item p{color:#33465E;font-size:16px}
+
+.roles h2{font-size:clamp(28px,3.2vw,38px);max-width:18em}
+.role{padding:24px 28px 8px 0;display:grid;gap:12px;align-content:start}
+.role h3{font-size:20px}
+.role ul{margin:0;padding-left:18px;display:grid;gap:8px;color:#33465E;font-size:16px}
+.role li::marker{color:var(--teal-text)}
+
+/* product screenshots */
+.shot{margin:0;display:grid;gap:8px;min-width:0}
+.shot .frame{background:#F3EEE5;border:1px solid var(--rule);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(11,29,56,.06),0 8px 24px rgba(11,29,56,.08)}
+.shot img{display:block;width:100%;height:auto}
+.shot a{display:block;cursor:zoom-in}
+.shot figcaption{font-size:13px;color:var(--slate)}
+.wide-shot{margin-top:40px;display:grid;gap:16px}
+.shot-intro{color:#33465E;max-width:44em}
+.shot-intro strong{color:var(--ink)}
+.rolerows{margin-top:40px;border-top:2px solid var(--ink)}
+.rolerow{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);gap:48px;align-items:center;padding-block:36px;border-bottom:1px solid var(--rule)}
+.rolerow .role{padding:0}
+.patterns{background:var(--mist)}
+.patrow{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:48px;align-items:center}
+.pattext{display:grid;gap:14px}
+.pattext h2{font-size:clamp(28px,3.2vw,38px)}
+.pattext p:not(.label){color:#33465E}
+
+.findings{background:var(--ink);color:#fff}
+.findings .head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.findings h2{font-size:clamp(28px,3.2vw,38px);max-width:16em}
+.findings .label{color:var(--aqua)}
+.findings .src{font-size:14px;color:var(--on-navy);max-width:24em}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:44px;background:rgba(169,184,200,.2);border-radius:12px;overflow:hidden}
+.stat{background:var(--ink);padding:32px;display:grid;gap:10px;align-content:start}
+.stat .big{font-family:var(--display);font-weight:600;font-size:44px;line-height:1;color:var(--teal);font-variant-numeric:tabular-nums}
+.stat h3{font-size:20px}
+.stat p{color:var(--on-navy);font-size:15.5px}
+
+.trust .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.trust .t{display:grid;gap:8px;align-content:start}
+.trust h3{font-size:19px}
+.trust p{color:#33465E;font-size:16px}
+.trust{padding-block:72px;border-bottom:1px solid var(--rule)}
+
+.cta{padding-block:96px}
+.cta .box{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:48px;align-items:center}
+.cta h2{font-size:clamp(30px,3.6vw,44px)}
+.cta p{color:#33465E;margin-top:16px;max-width:30em}
+.contact{background:var(--mist);border-radius:16px;padding:32px;display:grid;gap:14px}
+.contact .btn{justify-self:start}
+.contact .addr{font-family:var(--display);font-size:22px;color:var(--ink);user-select:all;word-break:break-word}
+.contact small{color:var(--slate);font-size:14px}
+.btn-navy{background:var(--ink);color:#fff} .btn-navy:hover{background:var(--deep)}
+
+footer{background:var(--ink);color:var(--on-navy);font-size:14px;padding-block:40px calc(40px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+footer a{color:#fff;text-decoration:none} footer a:hover{color:var(--teal)}
+footer .links{display:flex;gap:24px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero .wrap,.intro,.cta .box{grid-template-columns:minmax(0,1fr);gap:40px}
+  .grid3,.trust .wrap{grid-template-columns:minmax(0,1fr)}
+  .rolerow,.patrow{grid-template-columns:minmax(0,1fr);gap:24px}
+  nav a:not(.btn){display:none}
+  .dots{display:none}
+  section{padding-block:64px}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .chart .legend{grid-template-columns:minmax(0,1fr)}
+  .hero{padding-top:calc(100px + env(safe-area-inset-top,0px))}
+  .brand{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="EarlySight home">
+      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M8 36 Q32 8 56 36" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M8 36 Q30 58 56 20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="30" cy="33" r="5.5" fill="#fff"/><circle cx="56" cy="20" r="5.5" fill="#17B3C4"/></svg>
+      <span class="word"><span>Early</span><b>Sight</b></span>
+    </a>
+    <nav aria-label="Main">
+      <a href="#what-it-spots">What it spots</a>
+      <a href="#roles">For your staff</a>
+      <a href="#findings">Findings</a>
+      <a href="https://app.earlysight.co.uk">Log in</a>
+      <a class="btn btn-teal" href="#demo">Request a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Spot the change, <em>not just the number.</em></h1>
+      <p class="lede">Most reports rank pupils by where they are. EarlySight watches which way they are moving. It reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing, months before it shows in their results.</p>
+      <div class="ctas">
+        <a class="btn btn-teal" href="#demo">Request a demo</a>
+        <a class="btn btn-ghost" href="#what-it-spots">See what it spots</a>
+      </div>
+    </div>
+
+    <div class="viz">
+    <svg class="dots" viewBox="28 30 156 180" aria-hidden="true">
+    <circle cx="70" cy="40" r="4" fill="#B8E8EE"/><circle cx="36" cy="70" r="3" fill="#E4F6F8"/><circle cx="172" cy="56" r="12.5" fill="#17B3C4"/><circle cx="98" cy="84" r="7" fill="#5ECBD6"/><circle cx="154" cy="108" r="4" fill="#E4F6F8"/><circle cx="52" cy="124" r="4.5" fill="#B8E8EE"/><circle cx="132" cy="138" r="9" fill="#17B3C4"/><circle cx="176" cy="154" r="5.5" fill="#5ECBD6"/><circle cx="120" cy="200" r="6.5" fill="#B8E8EE"/>
+  </svg>
+    <figure class="chart" style="margin:0">
+      <div class="chart-head"><strong>Two pupils, one autumn term</strong><small>Illustrative example</small></div>
+      <svg viewBox="0 0 560 290" role="img" aria-labelledby="chart-title chart-desc">
+        <title id="chart-title">Weekly attendance for two pupils over ten weeks</title>
+        <desc id="chart-desc">Pupil A sits steady at about 88 percent, below the 90 percent line. Pupil B starts at 97 percent and falls steadily to 91 percent, still above the line.</desc>
+        <g stroke="rgba(169,184,200,.16)" stroke-width="1">
+          <line x1="60" y1="30" x2="528" y2="30"/><line x1="60" y1="98.8" x2="528" y2="98.8"/><line x1="60" y1="236.2" x2="528" y2="236.2"/>
+        </g>
+        <line x1="60" y1="167.5" x2="528" y2="167.5" stroke="#A9B8C8" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <g fill="#A9B8C8" font-size="12" text-anchor="end">
+          <text x="50" y="34">100%</text><text x="50" y="103">95%</text><text x="50" y="171.5">90%</text><text x="50" y="240">85%</text>
+        </g>
+        <g fill="#A9B8C8" font-size="12" text-anchor="middle">
+          <text x="60" y="270">Wk 1</text><text x="268" y="270">Wk 5</text><text x="528" y="270">Wk 10</text>
+        </g>
+        <polyline fill="none" stroke="#A9B8C8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="60,195 112,181.2 164,195 216,208.8 268,195 320,181.2 372,195 424,195 476,208.8 528,195"/>
+        <polyline fill="none" stroke="#17B3C4" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="60,71.2 112,57.5 164,71.2 216,71.2 268,85 320,98.8 372,112.5 424,126.2 476,140 528,153.8"/>
+        <circle cx="528" cy="195" r="5" fill="#A9B8C8"/>
+        <circle cx="528" cy="153.8" r="11" fill="rgba(23,179,196,.25)"/>
+        <circle cx="528" cy="153.8" r="5.5" fill="#17B3C4"/>
+        <text x="520" y="186" fill="#A9B8C8" font-size="13" text-anchor="end" font-weight="600">A</text>
+        <text x="514" y="146" fill="#17B3C4" font-size="13" text-anchor="end" font-weight="600">B</text>
+        <text x="96" y="160" fill="#A9B8C8" font-size="11.5">Usual 90% cut-off</text>
+      </svg>
+      <figcaption class="legend">
+        <div><i style="background:#A9B8C8"></i><span><b>Pupil A</b>: steady at 88%. Already on every list, already known to staff.</span></div>
+        <div><i style="background:#17B3C4"></i><span><b>Pupil B</b>: down 6 points in six weeks. Above the cut-off, so only the trend catches it.</span></div>
+      </figcaption>
+    </figure>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap intro">
+    <div style="display:grid;gap:16px">
+      <p class="label">Why it matters</p>
+      <h2>The problem you'd have spotted in March was usually visible in October.</h2>
+    </div>
+    <div class="copy">
+      <p>Your MIS already holds accurate attendance, behaviour and assessment data. What staff don't have is the time to go through it pupil by pupil, every week, looking for the ones who are starting to slip.</p>
+      <p>EarlySight does that reading for you. It analyses attendance, behaviour and grades together, compares each pupil with their own record, and gives every member of staff a short list of the pupils who need a look, with the reason why.</p>
+      <p><strong>No extra data entry.</strong> It works from the data your school already collects.</p>
+    </div>
+  </div>
+</section>
+
+<section class="spots" id="what-it-spots">
+  <div class="wrap">
+    <div class="head">
+      <p class="label">What it spots</p>
+      <h2>What your MIS and spreadsheets won't show you</h2>
+    </div>
+    <div class="grid3">
+      <article class="item">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="5" y="9" width="30" height="26" rx="4" stroke="#0F7280" stroke-width="2.5"/><path d="M5 17h30M13 5v8M27 5v8" stroke="#0F7280" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="27" r="3" fill="#17B3C4"/></svg>
+        <h3>Missed lessons, not just missed days</h3>
+        <p>Statutory attendance counts sessions. A pupil can be marked present all day and still miss every Thursday Maths lesson. EarlySight reads lesson registers and picks out subject avoidance.</p>
+      </article>
+      <article class="item">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="14" r="7" stroke="#0F7280" stroke-width="2.5"/><path d="M7 35c1.5-7 7-11 13-11s11.5 4 13 11" stroke="#0F7280" stroke-width="2.5" stroke-linecap="round"/><circle cx="31" cy="9" r="3.5" fill="#17B3C4"/></svg>
+        <h3>The quiet pupil with a new problem</h3>
+        <p>Every pupil is compared with their own record. Three sanctions in a fortnight means little for some pupils and a great deal for a pupil who has never had one. EarlySight knows the difference.</p>
+      </article>
+      <article class="item">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M20 6v28M8 12h24" stroke="#0F7280" stroke-width="2.5" stroke-linecap="round"/><path d="M8 12l-5 11h10L8 12zM32 12l-5 11h10l-5-11z" stroke="#0F7280" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="34" r="3" fill="#17B3C4"/></svg>
+        <h3>Fair comparisons, or none at all</h3>
+        <p>Subjects grade differently and terms aren't always comparable. EarlySight measures each pupil's position within the subject, and when two data collections can't be compared, it says so instead of drawing a misleading chart.</p>
+      </article>
+    </div>
+    <div class="wide-shot">
+      <p class="shot-intro"><strong>Every flag comes with its reason.</strong> Staff see the evidence in plain numbers, and mark each concern as considered once they've looked into it.</p>
+      <figure class="shot"><div class="frame"><a href="assets/shots/concerns-list.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="assets/shots/concerns-list.webp" alt="EarlySight concerns list showing two pupils flagged for persistent absence, a rise in sanctions, an absence pattern on Thursday period 1 English, and subject avoidance, each with the figures behind it" width="1600" height="292" loading="lazy" decoding="async"></a></div><figcaption>Demo school. All pupils and data are invented.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="roles" id="roles">
+  <div class="wrap">
+    <p class="label" style="margin-bottom:14px">For your staff</p>
+    <h2>The right list for each role, not one report for everyone</h2>
+    <div class="rolerows">
+      <div class="rolerow">
+        <div class="role">
+          <h3>Form tutors</h3>
+          <ul>
+            <li>A short, prioritised list of pupils who need a conversation</li>
+            <li>Alerts when a pupil's sanctions suddenly change</li>
+            <li>Pupils to congratulate, as well as pupils to worry about</li>
+          </ul>
+        </div>
+        <figure class="shot"><div class="frame"><a href="assets/shots/pupil-flags.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="assets/shots/pupil-flags.webp" alt="A pupil summary flagging persistent absence at 68.2%, possible avoidance of English, and drops in attainment and effort in named subjects" width="1414" height="326" loading="lazy" decoding="async"></a></div><figcaption>Demo school. All pupils and data are invented.</figcaption></figure>
+      </div>
+      <div class="rolerow">
+        <div class="role">
+          <h3>Year leaders</h3>
+          <ul>
+            <li>Which forms and pupils stand out across the year group</li>
+            <li>SEND and FSM gaps, for the cohort and for individuals</li>
+            <li>This year compared with previous years</li>
+          </ul>
+        </div>
+        <figure class="shot"><div class="frame"><a href="assets/shots/year10-forms.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="assets/shots/year10-forms.webp" alt="Bar charts comparing mean attendance and the number of pupils below 90% attendance across five Year 10 forms" width="1303" height="482" loading="lazy" decoding="async"></a></div><figcaption>Demo school. All pupils and data are invented.</figcaption></figure>
+      </div>
+      <div class="rolerow">
+        <div class="role">
+          <h3>Senior leaders</h3>
+          <ul>
+            <li>Whole-school views of attendance, behaviour, effort and attainment</li>
+            <li>Each year's intake compared with previous intakes at the same stage</li>
+            <li>Which concerns have been acted on, and which are still open</li>
+          </ul>
+        </div>
+        <figure class="shot"><div class="frame"><a href="assets/shots/cohort-history.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="assets/shots/cohort-history.webp" alt="Line chart comparing History attainment for four intakes term by term from Year 7, with one intake dropping sharply at the start of Key Stage 4" width="1291" height="564" loading="lazy" decoding="async"></a></div><figcaption>Demo school. All pupils and data are invented.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="patterns">
+  <div class="wrap patrow">
+    <div class="pattext">
+      <p class="label">Patterns, not just numbers</p>
+      <h2>See who gets into trouble together</h2>
+      <p>EarlySight maps which pupils are sanctioned in the same lessons, class by class. It shows at a glance where a seating plan or a timetable change might help more than another detention.</p>
+    </div>
+    <figure class="shot"><div class="frame"><a href="assets/shots/sanction-network.webp" target="_blank" rel="noopener" aria-label="Open full-size screenshot"><img src="assets/shots/sanction-network.webp" alt="Network diagram for a Maths class showing which pupils have been sanctioned together, with one group of five linked pupils and two separate pairs" width="1101" height="333" loading="lazy" decoding="async"></a></div><figcaption>Demo school. All pupils and data are invented.</figcaption></figure>
+  </div>
+</section>
+
+<section class="findings" id="findings">
+  <div class="wrap">
+    <div class="head">
+      <div style="display:grid;gap:14px">
+        <p class="label">What the data showed</p>
+        <h2>What we found in a real school's data</h2>
+      </div>
+      <p class="src">From our pilot with a UK secondary school. Every school is different, which is why EarlySight looks at yours.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="big">A year early</span>
+        <h3>Persistent absence was predictable</h3>
+        <p>Almost every pupil who became persistently absent was already below 95% attendance the year before.</p>
+      </div>
+      <div class="stat">
+        <span class="big">0.72</span>
+        <h3>Grades shifted between terms</h3>
+        <p>Autumn grades averaged 0.72 higher than spring's. Compared naively, almost every pupil appeared to decline.</p>
+      </div>
+      <div class="stat">
+        <span class="big">57th vs 15th</span>
+        <h3>Attendance and attainment move together</h3>
+        <p>Pupils above 97% attendance sat around the 57th percentile for attainment. Pupils below 90% sat around the 15th.</p>
+      </div>
+      <div class="stat">
+        <span class="big">1 grade+</span>
+        <h3>Subjects grade differently</h3>
+        <p>The most generous subject averaged more than a full grade above the least generous, which changes who looks like they are struggling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="t">
+      <h3>Uses the data you already have</h3>
+      <p>Built around your existing MIS data. Nothing new for staff to record.</p>
+    </div>
+    <div class="t">
+      <h3>Each person sees their own pupils</h3>
+      <p>Tutors, year leaders and senior leaders each see only the pupils in their remit.</p>
+    </div>
+    <div class="t">
+      <h3>Cyber Essentials certified</h3>
+      <p><a href="https://registry.blockmarktech.com/certificates/4498909c-b5b0-4c9a-8c0e-a70b8dabcdb7/active/">View our certificate</a>. Pupil data is handled under a data processing agreement with each school.</p>
+    </div>
+  </div>
+</div>
+
+<section class="cta" id="demo">
+  <div class="wrap box">
+    <div>
+      <h2>See which of your pupils are changing.</h2>
+      <p>We'll show you EarlySight running on a demo school, and talk through what it would look like with your own data.</p>
+    </div>
+    <div class="contact">
+      <p class="label">Request a demo</p>
+      <p class="addr">andy@earlysight.co.uk</p>
+      <a class="btn btn-navy" href="mailto:andy@earlysight.co.uk?subject=EarlySight%20demo%20request">Email to book a demo</a>
+      <small>Tell us your school and your role, and we'll arrange a time.</small>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Early Sight Education Ltd. Registered in England and Wales, company number 17487881.</p>
+    <div class="links">
+      <a href="https://app.earlysight.co.uk">Log in</a>
+      <a href="#demo">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
