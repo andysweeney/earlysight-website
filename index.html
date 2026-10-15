@@ -145,9 +145,25 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
 .brochure .cover{display:block;width:min(260px,70%);height:auto;border-radius:8px;border:1px solid var(--rule);box-shadow:0 1px 2px rgba(11,29,56,.06),0 8px 24px rgba(11,29,56,.10);margin-top:8px}
 .brochure ul{margin:0;padding-left:18px;display:grid;gap:6px;color:#33465E;font-size:16px}
 .brochure li::marker{color:var(--teal-text)}
-.formcard{background:var(--paper);border-radius:16px;padding:12px;display:grid;gap:10px}
-.formcard iframe{display:block;width:100%;height:720px;border:0;border-radius:10px}
-.formcard small{color:var(--slate);font-size:13px;padding:0 8px 6px;line-height:1.5}
+.formcard{background:var(--paper);border-radius:16px;padding:32px;display:grid;gap:18px}
+.formcard h3{font-size:22px}
+.formcard form{display:grid;gap:16px}
+.field{display:grid;gap:6px}
+.field label{font-size:15px;font-weight:600;color:var(--ink)}
+.field label span{font-weight:400;color:var(--slate)}
+.field input{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--rule);border-radius:8px;padding:11px 14px;min-height:46px;width:100%}
+.field input:focus{outline:none;border-color:var(--teal-text);box-shadow:0 0 0 3px var(--pale)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#33465E;cursor:pointer}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--teal-text);flex:none}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.formcard button.btn{border:0;cursor:pointer;justify-self:start}
+.formcard button[disabled]{opacity:.6;cursor:wait}
+.formcard .note{color:var(--slate);font-size:13px;line-height:1.5}
+.done{display:grid;gap:14px}
+.done .btn{justify-self:start}
+.done[hidden],form[hidden],.err[hidden]{display:none}
+.done p{color:#33465E}
+.err{color:#9a3328;font-size:14px}
 
 @media (max-width:900px){
   .hero .wrap,.intro,.cta .box,.brochure .box{grid-template-columns:minmax(0,1fr);gap:40px}
@@ -395,12 +411,45 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
       <img class="cover" src="assets/brochure-cover.webp" alt="Cover of the EarlySight brochure for senior leaders: We can help you solve the data problems facing your team" width="640" height="906" loading="lazy" decoding="async">
     </div>
     <div class="formcard">
-      <!-- Microsoft Forms embed (Collect responses, then Embed). To change the form, paste a new link into src. -->
-      <iframe src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=H0NoGj6KHUu16cXhJRHGlwav7sBGKnNInrezFHuVQjRUNlA4SjE4RTBCUDcxTFRMT0lNR05ORVpGSC4u&amp;embed=true" title="Download the EarlySight brochure" loading="lazy" allowfullscreen></iframe>
-      <small>Enter your email and the download link appears straight away. We'll only use your details to follow up about the brochure, and to send occasional updates if you ask for them. To have your details deleted, email <a href="mailto:admin@earlysight.co.uk">admin@earlysight.co.uk</a>.</small>
+      <h3>Get the brochure</h3>
+      <form id="brochure-form" novalidate>
+        <div class="field"><label for="bf-email">Work email</label><input id="bf-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="bf-name">Name <span>(optional)</span></label><input id="bf-name" name="name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="bf-school">School <span>(optional)</span></label><input id="bf-school" name="school" type="text" autocomplete="organization"></div>
+        <label class="check"><input id="bf-updates" name="updates" type="checkbox" value="Yes"> Send me occasional EarlySight updates</label>
+        <div class="hp" aria-hidden="true"><label>Leave this empty <input name="_honey" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <p class="err" id="bf-err" role="alert" hidden></p>
+        <button class="btn btn-navy" type="submit">Get the brochure</button>
+        <p class="note"><strong>Privacy:</strong> we'll only use your details to follow up about the brochure, and to send occasional updates if you tick the box. Your details are sent to us by email using the FormSubmit service and are not shared with anyone else. To have them deleted, email <a href="mailto:admin@earlysight.co.uk">admin@earlysight.co.uk</a>.</p>
+      </form>
+      <div class="done" id="brochure-done" hidden>
+        <p><strong>Thank you.</strong> Your brochure is ready.</p>
+        <a class="btn btn-teal" href="assets/EarlySight_SLT_brochure.pdf" download>Download the brochure (PDF)</a>
+        <p class="note">If you'd like to see EarlySight running, <a href="#demo">book a demo</a>.</p>
+      </div>
     </div>
   </div>
 </section>
+<script>
+(function(){
+  /* Sign-ups are emailed to admin@ by FormSubmit (formsubmit.co). The first one sends an activation email to admin@: click the link in it once. */
+  var ENDPOINT='https://formsubmit.co/ajax/admin@earlysight.co.uk';
+  var f=document.getElementById('brochure-form'); if(!f) return;
+  var done=document.getElementById('brochure-done'), err=document.getElementById('bf-err');
+  function finish(){ f.hidden=true; done.hidden=false; var a=done.querySelector('a.btn'); if(a) a.focus(); }
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); err.hidden=true;
+    var email=f.email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ err.textContent='Please enter a valid email address.'; err.hidden=false; f.email.focus(); return; }
+    if(f._honey.value){ finish(); return; }
+    var b=f.querySelector('button'); b.disabled=true; b.textContent='Sending…';
+    var body={ email:email, name:f.name.value.trim(), school:f.school.value.trim(),
+      updates:f.updates.checked?'Yes':'No', _subject:'Brochure download: '+email, _template:'table', _captcha:'false' };
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+      .catch(function(){}).then(finish);
+  });
+})();
+</script>
 
 <section class="cta" id="demo">
   <div class="wrap box">
