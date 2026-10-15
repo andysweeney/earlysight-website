@@ -136,8 +136,21 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:2
 footer a{color:#fff;text-decoration:none} footer a:hover{color:var(--teal)}
 footer .links{display:flex;gap:24px;flex-wrap:wrap}
 
+/* brochure download */
+.brochure{background:var(--mist)}
+.brochure .box{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:start}
+.brochure .info{display:grid;gap:16px;align-content:start}
+.brochure h2{font-size:clamp(28px,3.2vw,38px)}
+.brochure .info p:not(.label){color:#33465E;max-width:30em}
+.brochure .cover{display:block;width:min(260px,70%);height:auto;border-radius:8px;border:1px solid var(--rule);box-shadow:0 1px 2px rgba(11,29,56,.06),0 8px 24px rgba(11,29,56,.10);margin-top:8px}
+.brochure ul{margin:0;padding-left:18px;display:grid;gap:6px;color:#33465E;font-size:16px}
+.brochure li::marker{color:var(--teal-text)}
+.formcard{background:var(--paper);border-radius:16px;padding:12px;display:grid;gap:10px}
+.formcard iframe{display:block;width:100%;height:720px;border:0;border-radius:10px}
+.formcard small{color:var(--slate);font-size:13px;padding:0 8px 6px;line-height:1.5}
+
 @media (max-width:900px){
-  .hero .wrap,.intro,.cta .box{grid-template-columns:minmax(0,1fr);gap:40px}
+  .hero .wrap,.intro,.cta .box,.brochure .box{grid-template-columns:minmax(0,1fr);gap:40px}
   .grid3,.trust .wrap{grid-template-columns:minmax(0,1fr)}
   .rolerow,.patrow{grid-template-columns:minmax(0,1fr);gap:24px}
   nav a:not(.btn){display:none}
@@ -164,6 +177,7 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
       <a href="#what-it-spots">What it spots</a>
       <a href="#roles">For your staff</a>
       <a href="#findings">Findings</a>
+      <a href="#brochure">Brochure</a>
       <a href="https://app.earlysight.co.uk">Log in</a>
       <a class="btn btn-teal" href="#demo">Request a demo</a>
     </nav>
@@ -367,6 +381,27 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
   </div>
 </div>
 
+<section class="brochure" id="brochure">
+  <div class="wrap box">
+    <div class="info">
+      <p class="label">Free brochure</p>
+      <h2>EarlySight for senior leaders</h2>
+      <p>A four-page guide to the data problems facing your team, and how EarlySight helps solve them.</p>
+      <ul>
+        <li>Catching the change while it's still small</li>
+        <li>Giving every leader their own starting point</li>
+        <li>SEND and Free School Meals, side by side</li>
+      </ul>
+      <img class="cover" src="assets/brochure-cover.webp" alt="Cover of the EarlySight brochure for senior leaders: We can help you solve the data problems facing your team" width="640" height="906" loading="lazy" decoding="async">
+    </div>
+    <div class="formcard">
+      <!-- Microsoft Forms embed (Collect responses, then Embed). To change the form, paste a new link into src. -->
+      <iframe src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=H0NoGj6KHUu16cXhJRHGlwav7sBGKnNInrezFHuVQjRUNlA4SjE4RTBCUDcxTFRMT0lNR05ORVpGSC4u&amp;embed=true" title="Download the EarlySight brochure" loading="lazy" allowfullscreen></iframe>
+      <small>Enter your email and the download link appears straight away. We'll only use your details to follow up about the brochure, and to send occasional updates if you ask for them. To have your details deleted, email <a href="mailto:admin@earlysight.co.uk">admin@earlysight.co.uk</a>.</small>
+    </div>
+  </div>
+</section>
+
 <section class="cta" id="demo">
   <div class="wrap box">
     <div>
@@ -388,6 +423,7 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
     <p>© 2026 Early Sight Education Ltd. Registered in England and Wales, company number 17487881.</p>
     <div class="links">
       <a href="https://app.earlysight.co.uk">Log in</a>
+      <a href="#brochure">Brochure</a>
       <a href="#demo">Contact</a>
     </div>
   </div>
