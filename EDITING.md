@@ -27,5 +27,5 @@ Every version is kept. To undo, open `index.html` → **History**, pick the earl
 ## Other files
 - `CNAME` holds the web address. Don't change it.
 - `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name.
-- The brochure form is a Microsoft Form embedded in the page. Its questions, thank-you message and email alerts are changed in Microsoft Forms, not here.
+- The brochure form is built into `index.html` (search for `Get the brochure`). Each sign-up is emailed to admin@earlysight.co.uk by FormSubmit (formsubmit.co), and the download button appears straight after. To send sign-ups to a different address, search for `formsubmit.co/ajax/` and change the email after it.
 - `analytics/` and `discover/` forward visitors from the old Wix page addresses.
