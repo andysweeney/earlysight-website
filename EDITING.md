@@ -20,10 +20,12 @@ Every version is kept. To undo, open `index.html` → **History**, pick the earl
 | For your staff | `The right list for each role` |
 | Pilot findings | `What we found` |
 | Trust section | `Cyber Essentials certified` |
+| Brochure download and form | `Free brochure` |
 | Demo request and email address | `Request a demo` |
 | Footer | `company number` |
 
 ## Other files
 - `CNAME` holds the web address. Don't change it.
-- `assets/` holds the favicon and the logo used in the email footer.
+- `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name.
+- The brochure form is a Microsoft Form embedded in the page. Its questions, thank-you message and email alerts are changed in Microsoft Forms, not here.
 - `analytics/` and `discover/` forward visitors from the old Wix page addresses.
