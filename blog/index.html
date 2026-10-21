@@ -1,0 +1,37 @@
+---
+layout: default
+title: Blog
+description: "Short, practical pieces on attendance, behaviour and grades: what the numbers hide, and how to spot the change early."
+---
+<div class="blog-head">
+  <div class="wrap">
+    <p class="label">Blog</p>
+    <h1>Spot the change, not just the number</h1>
+    <p class="lede">Short, practical pieces on attendance, behaviour and grades: what the numbers hide, and how to see the change while it's still small.</p>
+  </div>
+</div>
+
+<section class="post-list">
+  <div class="wrap">
+    {%- if site.posts.size > 0 %}
+    <ol class="posts">
+      {%- for post in site.posts %}
+      <li class="post-card{% if post.image %} has-image{% endif %}">
+        {%- if post.image %}
+        <a class="thumb" href="{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{{ post.image }}" alt="" loading="lazy" decoding="async"></a>
+        {%- endif %}
+        <div class="card-text">
+          <p class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time></p>
+          <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+          {%- if post.description %}
+          <p class="desc">{{ post.description }}</p>
+          {%- endif %}
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+    {%- else %}
+    <p class="empty">The first posts are on their way.</p>
+    {%- endif %}
+  </div>
+</section>
