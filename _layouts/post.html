@@ -1,0 +1,42 @@
+---
+layout: default
+---
+{%- assign words = content | strip_html | number_of_words %}
+{%- assign minutes = words | divided_by: 200.0 | ceil | at_least: 1 %}
+<article class="post">
+  <header class="post-head">
+    <div class="wrap narrow">
+      <p class="label"><a href="/blog/">Blog</a></p>
+      <h1>{{ page.title }}</h1>
+      {%- if page.description %}
+      <p class="standfirst">{{ page.description }}</p>
+      {%- endif %}
+      <p class="meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time> · {{ minutes }} min read</p>
+    </div>
+  </header>
+
+  <div class="wrap narrow">
+    {%- if page.image %}
+    <figure class="cover">
+      <img src="{{ page.image }}" alt="{{ page.image_alt | default: '' | escape }}">
+      {%- if page.caption %}
+      <figcaption>{{ page.caption }}</figcaption>
+      {%- endif %}
+    </figure>
+    {%- endif %}
+
+    <div class="prose">
+{{ content }}
+    </div>
+
+    <aside class="post-cta">
+      <div>
+        <p class="label">See it running</p>
+        <p class="cta-line">We'll show you EarlySight on a demo school, and talk through what it would look like with your own data.</p>
+      </div>
+      <a class="btn btn-navy" href="mailto:andy@earlysight.co.uk?subject=EarlySight%20demo%20request">Email to book a demo</a>
+    </aside>
+
+    <p class="back"><a href="/blog/">← All posts</a></p>
+  </div>
+</article>
