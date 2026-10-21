@@ -1,0 +1,25 @@
+# EarlySight website settings, read by GitHub Pages (Jekyll) when the site is published.
+# The main page (index.html) has no settings block at its top, so Jekyll publishes it exactly as it is.
+# Only the blog uses these settings.
+
+title: EarlySight
+description: "EarlySight reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing."
+url: "https://earlysight.co.uk"
+timezone: Europe/London
+
+# Each post's web address: earlysight.co.uk/blog/<the post's file name without the date>/
+permalink: /blog/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins:
+  - jekyll-feed
+feed:
+  path: blog/feed.xml
+
+# Files in the repository that are not part of the website.
+exclude:
+  - EDITING.md
+  - README.md
