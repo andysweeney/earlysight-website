@@ -27,21 +27,10 @@ None of this proves that cost is the cause. But it does mean a school should che
 
 ## De-sensitisation to sanctions
 
-I think that our biggest concern was that Equipment sanctions seemed to lead to de-sensitisation to Sanctions. Pupils don't distinguish between their misdemeanours - to them a "Code" for a missing pencil case is fundamentally identical to a Code for skipping a lesson. By sanctioning pupils for not having a pencil case, we are making other sanctions less impactful. Think about how a pupil feels about their first code. If it was outside of their control then why would they care about receiving a second? EarlySight focusses on relative performance and absolute thresholds. This disenfranchisement is what we are here to address. 
+In sample data that we reviewed for a large school, there were several children who had virtually flawless behaviour until all of a sudden they started picking up sanctions in December and January. The school's instinct was to see them as pupils who needed substantial support and escalation. Our Pupil View on the platform gave a much better insight. Their first codes were all landing in PE and Maths and virtually all of them were "Equipment Codes". Additionally, these were FSM pupils. So what had happened? The deterioration in behaviour was because they had lost their compasses, protractors and PE tops. Either their parents couldn't afford replacements OR the pupil didn't want to ask. 
 
-## The question to ask your data
+However what happened next was even more interesting. Pupils don't distinguish between their misdemeanours - to them a "Code" for a missing pencil case is fundamentally identical to a Code for skipping a lesson. By sanctioning pupils for not having a pencil case, the school was making other sanctions less impactful. Think about how a pupil feels about their first code. If it was outside of their control then why would they care about receiving a second? Across this cohort we saw increases in other sanctions about two months after the Equipment codes began. Our platform could have helped to identify the source of the problem before it escalated.
 
-The key is to look at sanctions by type, not just in total.
-
-If pupils on free school meals get more sanctions of every kind, in about the same mix as everyone else, you're looking at something broader than cost. If their extra sanctions are concentrated in equipment, uniform and homework, that points to things that cost money: kit, clothes, a quiet place and a device to work on.
-
-Five steps to try this half term:
-
-1. Group your sanction codes into types: equipment, uniform, homework, lateness and conduct.
-2. For each type, compare sanctions per pupil for pupils on free school meals against everyone else. Per pupil, not totals.
-3. Look at the items. Is it PE kit, a calculator, shoes? Is it one subject?
-4. Separate SEND. Many pupils on free school meals also have SEND, and the two can look alike in the data.
-5. Ask the pupils who keep coming up. A spare-kit box or a uniform bank costs less than a term of detentions.
 
 ## Two changes this year
 
