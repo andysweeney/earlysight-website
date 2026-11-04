@@ -1,12 +1,13 @@
-title: "Is a class performing well or performing badly? How EarlySight draws the distinction.
-"
+---
+title: "Is a class performing well or performing badly? How EarlySight draws the distinction."
 description: "The top class in a year may actually be under-performing hugely...and the worst class in the year may be performing fantastically. EarlySight lets SLT draw a distinction and identify that gap. 
 
 How do we achieve that? We look at who is in the room before we calculate anything."
-
-caption: "Never take a class’s performance at face value"
+date: 2026-09-17 22:45:00 +0100
+image: /assets/14995841-teacher-4784917_1920.jpg
+image_alt: "What your current class data hides"
+caption: "Never take a class’s performance at face value."
 ---
-
 
 ## A class is a group of individual pupils, not a unit
 A class's sanction count, a set's grades and a form's attendance say as much about who is in the room as about what happens in it. Put a group of pupils who struggle everywhere into one class, and it will look like a problem class even when the lessons are going well. The worst-performing Geography class may actually be a group of pupils who are exceeding their expected performance and SLT should recognise this.
