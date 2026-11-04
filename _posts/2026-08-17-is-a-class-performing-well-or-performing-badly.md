@@ -45,12 +45,13 @@ Nobody disappears. Pupils who leave stay in 9R's history for the time they were 
 
 ## What this means in EarlySight
 Before EarlySight calls a class good or bad, it asks how the same pupils do elsewhere.
-•	A class's sanctions are compared with what the same pupils receive in their other lessons.
-•	Each subject is compared with the same pupils' other subjects, with the raw position shown alongside.
-•	Today's class and tutor-group figures are built from the pupils in the room now. Pupils who leave stay in the group's history for the time they were there, and a pupil who changes class takes their record with them.
-•	Change is each pupil's own change. Only pupils here at both points are counted, including in a group's last 12 months, which follow the pupils in the group, not the group itself.
-•	Where the question is how the school did at the time, such as last year's headline figures, we count everyone on roll then. The SLT week-by-week charts can switch to today's pupils, and the cohort tables to “Pupils here throughout”.
-A raw number mostly tells you who is in the room. EarlySight tries to tell you what happened in it.
+-	A class's sanctions are compared with what the same pupils receive in their other lessons.
+-	Each subject is compared with the same pupils' other subjects, with the raw position shown alongside.
+-	Today's class and tutor-group figures are built from the pupils in the room now. Pupils who leave stay in the group's history for the time they were there, and a pupil who changes class takes their record with them.
+-	Change is each pupil's own change. Only pupils here at both points are counted, including in a group's last 12 months, which follow the pupils in the group, not the group itself.
+-	Where the question is how the school did at the time, such as last year's headline figures, we count everyone on roll then. The SLT week-by-week charts can switch to today's pupils, and the cohort tables to “Pupils here throughout”.
+
+### A raw number mostly tells you who is in the room. EarlySight tries to tell you what happened in it.
 
 We'll show you EarlySight on a demo school, and talk through what it would look like with your own data.
 Email to book a demo
