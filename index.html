@@ -3,9 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EarlySight</title>
-<meta name="description" content="EarlySight reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing, months before it shows in their results.">
+<title>EarlySight: pupil data analysis for schools, from your MIS</title>
+<meta name="description" content="Attendance, behaviour and grades analysis for secondary schools. EarlySight reads the data in your MIS and flags pupils whose performance is changing.">
+<link rel="canonical" href="https://earlysight.co.uk/">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/logo-512.png">
+<link rel="alternate" type="application/atom+xml" title="EarlySight blog" href="/blog/feed.xml">
+<!-- How the page looks when its link is shared on LinkedIn, X and elsewhere -->
+<meta property="og:site_name" content="EarlySight">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EarlySight: pupil data analysis for schools">
+<meta property="og:description" content="EarlySight reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing, months before it shows in their results.">
+<meta property="og:url" content="https://earlysight.co.uk/">
+<meta property="og:image" content="https://earlysight.co.uk/assets/blog/social-default.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Tells search engines who the company is and what the site is (structured data) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://earlysight.co.uk/#organization",
+      "name": "EarlySight",
+      "legalName": "Early Sight Education Ltd",
+      "url": "https://earlysight.co.uk/",
+      "logo": "https://earlysight.co.uk/assets/logo-512.png",
+      "email": "andy@earlysight.co.uk",
+      "description": "Pupil data analysis for secondary schools: attendance, behaviour and grades, read from the school's MIS.",
+      "areaServed": "GB",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "Companies House company number",
+        "value": "17487881"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://earlysight.co.uk/#website",
+      "name": "EarlySight",
+      "url": "https://earlysight.co.uk/",
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "https://earlysight.co.uk/#organization" }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap">
@@ -51,6 +95,7 @@ nav .btn{padding:10px 16px}
 .hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:center}
 .hero h1{font-size:clamp(40px,5.6vw,66px);letter-spacing:-.025em}
 .hero h1 em{font-style:normal;color:var(--teal)}
+.hero .kicker{color:var(--teal);margin-bottom:18px}
 .hero .lede{margin-top:22px;font-size:19px;color:#D8E2EC;max-width:31em}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 
@@ -205,6 +250,7 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
 <div class="hero">
   <div class="wrap">
     <div>
+      <p class="label kicker">Pupil data analysis for secondary schools</p>
       <h1>Spot the change, <em>not just the number.</em></h1>
       <p class="lede">Most reports rank pupils by where they are. EarlySight watches which way they are moving. It reads the attendance, behaviour and grades already in your MIS and flags the pupils whose performance is changing, months before it shows in their results.</p>
       <div class="ctas">

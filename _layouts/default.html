@@ -24,6 +24,27 @@
 <meta name="twitter:card" content="summary_large_image">
 {%- if page.layout == 'post' %}
 <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<!-- Tells search engines this page is a blog post, who published it and when (structured data) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | strip_html | jsonify }},
+  "description": {{ page_desc | jsonify }},
+  "image": {{ page_image | absolute_url | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "inLanguage": "en-GB",
+  "author": { "@type": "Organization", "name": "EarlySight", "url": "https://earlysight.co.uk/" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EarlySight",
+    "url": "https://earlysight.co.uk/",
+    "logo": { "@type": "ImageObject", "url": "https://earlysight.co.uk/assets/logo-512.png" }
+  }
+}
+</script>
 {%- endif %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
