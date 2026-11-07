@@ -50,6 +50,11 @@ Posts appear on earlysight.co.uk/blog, newest first, a minute or two after you c
 - `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name.
 - The brochure form is built into `index.html` (search for `Get the brochure`). Each sign-up is emailed to admin@earlysight.co.uk by FormSubmit (formsubmit.co), and the download button appears straight after. To send sign-ups to a different address, search for `formsubmit.co/ajax/` and change the email after it.
 - `analytics/` and `discover/` forward visitors from the old Wix page addresses.
+- **For search engines (Google, Bing):**
+  - `sitemap.xml` lists the site's pages for search engines. Blog posts are added to it automatically. If you add a new main page, add its address to the list in that file.
+  - `robots.txt` tells search engines they may read the whole site, and where the sitemap is.
+  - The main page's search title, description and share preview are at the top of `index.html` (search for `<title>`). Keep the title under about 60 characters, and the description under about 155, or Google cuts them short.
+  - `assets/logo-512.png` is the square logo search engines show for EarlySight.
 - **The blog:**
   - `blog/index.html` is the list of posts. It updates itself.
   - `_posts/` holds the posts, one file each.
