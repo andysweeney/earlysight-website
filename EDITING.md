@@ -47,7 +47,7 @@ Posts appear on earlysight.co.uk/blog, newest first, a minute or two after you c
 
 ## Other files
 - `CNAME` holds the web address. Don't change it.
-- `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name.
+- `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name. If you ever rename it, change the name in two places as well: `robots.txt`, and the `var PDF=` line in `index.html` (the download link is only added after the form is sent, so search engines don't find the PDF).
 - The brochure form is built into `index.html` (search for `Get the brochure`). Each sign-up is emailed to admin@earlysight.co.uk by FormSubmit (formsubmit.co), and the download button appears straight after. To send sign-ups to a different address, search for `formsubmit.co/ajax/` and change the email after it.
 - `analytics/` and `discover/` forward visitors from the old Wix page addresses.
 - **For search engines (Google, Bing):**

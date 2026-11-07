@@ -471,7 +471,7 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
       </form>
       <div class="done" id="brochure-done" hidden>
         <p><strong>Thank you.</strong> Your brochure is ready.</p>
-        <a class="btn btn-teal" href="assets/EarlySight_SLT_brochure.pdf" download>Download the brochure (PDF)</a>
+        <a class="btn btn-teal" id="bf-dl" download>Download the brochure (PDF)</a>
         <p class="note">If you'd like to see EarlySight running, <a href="#demo">book a demo</a>.</p>
       </div>
     </div>
@@ -483,7 +483,10 @@ footer .links{display:flex;gap:24px;flex-wrap:wrap}
   var ENDPOINT='https://formsubmit.co/ajax/admin@earlysight.co.uk';
   var f=document.getElementById('brochure-form'); if(!f) return;
   var done=document.getElementById('brochure-done'), err=document.getElementById('bf-err');
-  function finish(){ f.hidden=true; done.hidden=false; var a=done.querySelector('a.btn'); if(a) a.focus(); }
+  /* The brochure link is only added once the form is sent, so the PDF's address isn't in the page for
+     search engines to find. robots.txt also asks them not to read it. The name is split on purpose. */
+  var PDF='assets/EarlySight_SLT_'+'brochure'+'.pdf';
+  function finish(){ f.hidden=true; done.hidden=false; var a=document.getElementById('bf-dl'); if(a){ a.setAttribute('href',PDF); a.focus(); } }
   f.addEventListener('submit',function(e){
     e.preventDefault(); err.hidden=true;
     var email=f.email.value.trim();
