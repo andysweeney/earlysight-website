@@ -47,7 +47,7 @@ It's also early. A pupil avoiding one subject is usually still coming in every d
 ## What you need
 
 - **Lesson registers in your MIS.** EarlySight uses the registers your staff already take. There's nothing new to record.
-- **Works with all major MIS providers.** EarlySight reads your MIS's own exports or can integrate directly via Wonde (subject to MIS API availability).
+- **[Works with all major MIS providers](/works-with-your-mis/).** EarlySight reads your MIS's own exports or can integrate directly via Wonde (subject to MIS API availability).
 - **Your figures stay as they are.** EarlySight only reads your data. It never writes anything back to your MIS, so your statutory attendance figures are unchanged.
 
 ## Questions schools ask
