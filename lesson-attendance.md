@@ -4,7 +4,7 @@ title: "Lesson attendance analysis"
 heading: "Find the pupils who are in school but missing lessons"
 label: "What it spots"
 permalink: /lesson-attendance/
-description: "Your attendance figure counts the morning and afternoon registers. EarlySight reads your lesson registers too, and shows which pupils are missing lessons in between, which subjects, and when."
+description: "Your attendance figure counts the morning and afternoon registers. EarlySight reads your lesson registers, and shows which pupils are missing lessons in between, which subjects, and when."
 image: /assets/blog/present-missing-english.png
 image_alt: "One pupil's typical week: present at every morning and afternoon register, but missing English lessons on four days"
 caption: "One pupil over six weeks: 100% at registration, 15 lessons missed, 12 of them English. Invented example data."
@@ -29,7 +29,7 @@ That's one day. Across a half term, more pupils than that will have missed the o
 
 ## What EarlySight shows
 
-EarlySight reads your lesson registers alongside the morning and afternoon registers, for every pupil.
+EarlySight reads every pupil's lesson registers, lesson by lesson, and works out their attendance from them.
 
 - **Subject avoidance.** When a pupil misses one subject far more often than their other lessons, they appear on their form tutor's and year leader's lists, with the missed lessons behind the flag.
 - **Patterns in the week.** Repeated absences from the same lesson, such as Thursday period 1 English, are picked out, because a pattern points to a cause: one subject, one teacher, one time of the week.
@@ -54,7 +54,7 @@ It's also early. A pupil avoiding one subject is usually still coming in every d
 
 ### Does this replace our statutory attendance figure?
 
-No. Your statutory figure still comes from the morning and afternoon registers. EarlySight shows it too, with lesson attendance beside it.
+No. Your statutory figure still comes from the morning and afternoon registers in your MIS, and it doesn't change. EarlySight works from your lesson registers, so it shows what happens between those two marks.
 
 ### Who sees which pupils?
 
