@@ -1,0 +1,48 @@
+---
+layout: default
+---
+{%- comment -%}
+  A main page (not a blog post), such as Lesson attendance or the privacy notice.
+  Settings at the top of the page's file:
+    title, description   as for a blog post
+    label                the small line above the headline (optional)
+    cta: false           leaves out the "book a demo" box at the bottom (optional)
+{%- endcomment -%}
+<article class="post">
+  <header class="post-head">
+    <div class="wrap narrow">
+      {%- if page.label %}
+      <p class="label">{{ page.label }}</p>
+      {%- endif %}
+      <h1>{{ page.heading | default: page.title }}</h1>
+      {%- if page.description %}
+      <p class="standfirst">{{ page.description }}</p>
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="wrap narrow">
+    {%- if page.image %}
+    <figure class="cover">
+      <img src="{{ page.image }}" alt="{{ page.image_alt | default: '' | escape }}">
+      {%- if page.caption %}
+      <figcaption>{{ page.caption }}</figcaption>
+      {%- endif %}
+    </figure>
+    {%- endif %}
+
+    <div class="prose">
+{{ content }}
+    </div>
+
+    {%- unless page.cta == false %}
+    <aside class="post-cta">
+      <div>
+        <p class="label">See it running</p>
+        <p class="cta-line">We'll show you EarlySight on a demo school, and talk through what it would look like with your own data.</p>
+      </div>
+      <a class="btn btn-navy" href="mailto:andy@earlysight.co.uk?subject=EarlySight%20demo%20request">Email to book a demo</a>
+    </aside>
+    {%- endunless %}
+  </div>
+</article>
