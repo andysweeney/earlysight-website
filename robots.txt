@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+# The brochure is given out through the form on the main page, not through search.
+Disallow: /assets/EarlySight_SLT_brochure.pdf
 
 Sitemap: https://earlysight.co.uk/sitemap.xml
