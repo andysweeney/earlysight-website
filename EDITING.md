@@ -45,13 +45,24 @@ Posts appear on earlysight.co.uk/blog, newest first, a minute or two after you c
 
 **Something wrong?** If a post doesn't appear within five minutes, open the **Actions** tab: a red cross means the site didn't build. Click it to see which file it was. The usual cause is a missing `---` line or a stray quote mark in the settings at the top.
 
+## Main pages (Lesson attendance, Privacy)
+Pages such as `lesson-attendance.md` and `privacy.md` sit at the top of the repository and are written like blog posts. The settings at the top:
+- `title`: the page's name in Google and in the browser tab. `heading`: the headline on the page, if it should differ (optional).
+- `permalink`: the web address, for example `/lesson-attendance/`. Don't change it once the page is live, or links to it break.
+- `label`: the small line above the headline. `description`: the line under it, also used by Google and in share previews.
+- `cta: false` leaves out the "book a demo" box (used on the privacy notice).
+
+To add a new one, copy `lesson-attendance.md`, give it a new file name and `permalink`, and replace the wording. It's added to the sitemap automatically.
+
+**The privacy notice** (`privacy.md`): when it changes, update the "Last updated" date at the top.
+
 ## Other files
 - `CNAME` holds the web address. Don't change it.
 - `assets/` holds the favicon, the logo used in the email footer, the brochure (`EarlySight_SLT_brochure.pdf`) and its cover picture (`brochure-cover.webp`). To update the brochure, upload a new PDF with the same name.
 - The brochure form is built into `index.html` (search for `Get the brochure`). Each sign-up is emailed to admin@earlysight.co.uk by FormSubmit (formsubmit.co), and the download button appears straight after. To send sign-ups to a different address, search for `formsubmit.co/ajax/` and change the email after it.
 - `analytics/` and `discover/` forward visitors from the old Wix page addresses.
 - **For search engines (Google, Bing):**
-  - `sitemap.xml` lists the site's pages for search engines. Blog posts are added to it automatically. If you add a new main page, add its address to the list in that file.
+  - `sitemap.xml` lists the site's pages for search engines. Blog posts and main pages (below) are added to it automatically.
   - `robots.txt` tells search engines they may read the whole site, and where the sitemap is.
   - The main page's search title, description and share preview are at the top of `index.html` (search for `<title>`). Keep the title under about 60 characters, and the description under about 155, or Google cuts them short.
   - `assets/logo-512.png` is the square logo search engines show for EarlySight.
