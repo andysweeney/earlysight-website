@@ -2,6 +2,8 @@
 title: "Will EarlySight work with my school?"
 description: "Every school has its own words, its own week, its own groups and its own idea of when a pupil needs a look. EarlySight is set up around yours, not the other way round."
 date: 2026-11-08 00:30:00 +0000
+image: /assets/school.jpg
+image_alt: "A smiling teacher with folded arms in front of her class"
 ---
 
 It's the first question most schools ask us, and it's a fair one. No two schools run the same way. One has boarding houses and lessons on Saturday mornings. Another calls its pupils students, its sanctions behaviour points, and its Year 9 "Remove".
